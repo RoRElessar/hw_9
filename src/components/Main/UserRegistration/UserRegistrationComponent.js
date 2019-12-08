@@ -154,6 +154,21 @@ class UserRegistrationComponent extends Component {
       headers: { 'Content-Type': 'multipart/form-data' }
     })
 
+    this.setState({
+      user: {
+        first_name: '',
+        last_name: '',
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+        region: '',
+        sex: 'male',
+        subscription: false,
+        additional_information: '',
+        image: null,
+      }
+    })
     this.notify()
   }
 
