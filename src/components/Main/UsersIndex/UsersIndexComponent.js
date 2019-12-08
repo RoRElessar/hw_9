@@ -48,7 +48,7 @@ class UsersIndexComponent extends Component {
                   <td>{user.region}</td>
                   <td><img width="250px" className="img-thumbnail img-fluid" src={user.image.url} alt={user.name}/></td>
                   <td>{user.sex}</td>
-                  <td>{user.subscription}</td>
+                  <td>{user.subscription === true ? 'Yes' : 'No'}</td>
                   <td>{user.additional_information}</td>
                   <td>
                     <Router>

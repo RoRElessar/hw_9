@@ -30,7 +30,7 @@ class UserRegistrationComponent extends Component {
         email: '',
         password: '',
         password_confirmation: '',
-        image: null,
+        image: '',
       },
       firstNameValid: false,
       lastNameValid: false,
@@ -58,30 +58,73 @@ class UserRegistrationComponent extends Component {
 
   validateField(fieldName, value) {
     let fieldValidationErrors = this.state.formErrors
+    let firstNameValid = this.state.firstNameValid
+    let lastNameValid = this.state.lastNameValid
+    let nameValid = this.state.nameValid
     let emailValid = this.state.emailValid
     let passwordValid = this.state.passwordValid
+    let passwordConfirmationValid = this.state.passwordConfirmationValid
+    let imageValid = this.state.imageValid
+    const nameMatches = /^[0-9a-zA-Z]+$/
+    const emailMatches = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i
+    const allowedExtensions = ['jpg', 'jpeg', 'png']
 
     switch (fieldName) {
+      case 'first_name':
+        firstNameValid = value.length > 0 && nameMatches.test(value)
+        fieldValidationErrors.first_name = firstNameValid ? '' : ' is invalid, use only letters and numbers'
+        break
+      case 'last_name':
+        lastNameValid = value.length > 0 && nameMatches.test(value)
+        fieldValidationErrors.last_name = lastNameValid ? '' : ' is invalid, use only letters and numbers'
+        break
+      case 'name':
+        nameValid = value.length > 0 && nameMatches.test(value)
+        fieldValidationErrors.name = nameValid ? '' : ' is invalid, use only letters and numbers'
+        break
       case 'email':
-        emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
+        emailValid = emailMatches.test(value)
         fieldValidationErrors.email = emailValid ? '' : ' is invalid'
         break
       case 'password':
         passwordValid = value.length >= 10
         fieldValidationErrors.password = passwordValid ? '' : ' is too short'
         break
+      case 'password_confirmation':
+        passwordConfirmationValid = value.length >=10
+        fieldValidationErrors.password_confirmation = passwordConfirmationValid ? '' : ' is too short'
+        break
+      case 'image':
+        imageValid = value.length > 0 && allowedExtensions.includes(value.split('.')[0])
+        fieldValidationErrors.image = imageValid ? '' : ' must be present'
+        break
       default:
         break
     }
 
-    this.setState({formErrors: fieldValidationErrors,
+    this.setState({
+      formErrors: fieldValidationErrors,
+      firstNameValid: firstNameValid,
+      lastNameValid: lastNameValid,
+      nameValid: nameValid,
       emailValid: emailValid,
-      passwordValid: passwordValid
+      passwordValid: passwordValid,
+      passwordConfirmationValid: passwordConfirmationValid,
+      imageValid: imageValid,
     }, this.validateForm);
   }
 
   validateForm() {
-    this.setState({formValid: this.state.emailValid && this.state.passwordValid});
+    this.setState({
+      formValid:
+        this.state.firstNameValid &&
+        this.state.lastNameValid &&
+        this.state.nameValid &&
+        this.state.emailValid &&
+        this.state.passwordValid &&
+        this.state.passwordConfirmationValid
+        // this.state.imageValid
+    });
   }
 
   errorClass(error) {
@@ -115,7 +158,7 @@ class UserRegistrationComponent extends Component {
           <form onSubmit={this.handleSubmit}>
             <div className="row">
               <div className="col-lg-6">
-                <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
+                <div className={`form-group ${this.errorClass(this.state.formErrors.first_name)}`}>
                   <label htmlFor="firstName">First Name</label>
                   <input type="text"
                          className="form-control"
@@ -127,7 +170,7 @@ class UserRegistrationComponent extends Component {
               </div>
 
               <div className="col-lg-6">
-                <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
+                <div className={`form-group ${this.errorClass(this.state.formErrors.last_name)}`}>
                   <label htmlFor="lastName">Last Name</label>
                   <input type="text"
                          className="form-control"
@@ -139,7 +182,7 @@ class UserRegistrationComponent extends Component {
               </div>
 
               <div className="col-lg-6">
-                <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
+                <div className={`form-group ${this.errorClass(this.state.formErrors.name)}`}>
                   <label htmlFor="name">Name</label>
                   <input type="text"
                          className="form-control"
@@ -165,7 +208,7 @@ class UserRegistrationComponent extends Component {
               </div>
 
               <div className="col-lg-6">
-                <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
+                <div className={`form-group ${this.errorClass(this.state.formErrors.password)}`}>
                   <label htmlFor="password">Password</label>
                   <input type="password"
                          className="form-control"
@@ -178,7 +221,7 @@ class UserRegistrationComponent extends Component {
               </div>
 
               <div className="col-lg-6">
-                <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
+                <div className={`form-group ${this.errorClass(this.state.formErrors.password_confirmation)}`}>
                   <label htmlFor="passwordConfirmation">Confirm Password</label>
                   <input type="password"
                          className="form-control"
@@ -268,7 +311,7 @@ class UserRegistrationComponent extends Component {
               </div>
 
               <div className="col-lg-6">
-                <div className={`form-group text-left ${this.errorClass(this.state.formErrors.email)}`}>
+                <div className={`form-group text-left ${this.errorClass(this.state.formErrors.image)}`}>
                   <label htmlFor="image">Image</label><br/>
                   <input type="file"
                          id="image"

@@ -1,0 +1,12 @@
+.has-error input {
+  border: 1px solid red;
+}
+
+.form-errors {
+  background-color: crimson;
+  color: #fff;
+
+  p {
+    margin-bottom: 0;
+  }
+}
