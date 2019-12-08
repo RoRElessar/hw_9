@@ -11,26 +11,26 @@ class UserRegistrationComponent extends Component {
     super(props)
     this.state = {
       user: {
-        'user[first_name]': '',
-        'user[last_name]': '',
-        'user[name]': '',
-        'user[email]': '',
-        'user[password]': '',
-        'user[password_confirmation]': '',
-        'user[region]': '',
-        'user[sex]': 'male',
-        'user[subscription]': false,
-        'user[additional_information]': '',
-        'user[image]': null,
+        first_name: '',
+        last_name: '',
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+        region: '',
+        sex: 'male',
+        subscription: false,
+        additional_information: '',
+        image: null,
       },
       formErrors: {
-        'user[first_name]': '',
-        'user[last_name]': '',
-        'user[name]': '',
-        'user[email]': '',
-        'user[password]': '',
-        'user[password_confirmation]': '',
-        'user[image]': null,
+        first_name: '',
+        last_name: '',
+        name: '',
+        email: '',
+        password: '',
+        password_confirmation: '',
+        image: null,
       },
       firstNameValid: false,
       lastNameValid: false,
@@ -62,13 +62,13 @@ class UserRegistrationComponent extends Component {
     let passwordValid = this.state.passwordValid
 
     switch (fieldName) {
-      case 'user[email]':
+      case 'email':
         emailValid = value.match(/^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i)
-        fieldValidationErrors['user[email]'] = emailValid ? '' : ' is invalid'
+        fieldValidationErrors.email = emailValid ? '' : ' is invalid'
         break
-      case 'user[password]':
+      case 'password':
         passwordValid = value.length >= 10
-        fieldValidationErrors['user[password]'] = passwordValid ? '' : ' is too short'
+        fieldValidationErrors.password = passwordValid ? '' : ' is too short'
         break
       default:
         break
@@ -115,43 +115,43 @@ class UserRegistrationComponent extends Component {
           <form onSubmit={this.handleSubmit}>
             <div className="row">
               <div className="col-lg-6">
-                <div className={`form-group ${this.errorClass(this.state.formErrors['user[email]'])}`}>
+                <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
                   <label htmlFor="firstName">First Name</label>
                   <input type="text"
                          className="form-control"
                          id="firstName"
                          onChange={this.changeHandler}
                          value={this.state.user.first_name}
-                         name="user[first_name]"/>
+                         name="first_name"/>
                 </div>
               </div>
 
               <div className="col-lg-6">
-                <div className={`form-group ${this.errorClass(this.state.formErrors['user[email]'])}`}>
+                <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
                   <label htmlFor="lastName">Last Name</label>
                   <input type="text"
                          className="form-control"
                          id="lastName"
                          onChange={this.changeHandler}
                          value={this.state.user.last_name}
-                         name="user[last_name]"/>
+                         name="last_name"/>
                 </div>
               </div>
 
               <div className="col-lg-6">
-                <div className={`form-group ${this.errorClass(this.state.formErrors['user[email]'])}`}>
+                <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
                   <label htmlFor="name">Name</label>
                   <input type="text"
                          className="form-control"
                          id="name"
                          onChange={this.changeHandler}
                          value={this.state.user.name}
-                         name="user[name]"/>
+                         name="name"/>
                 </div>
               </div>
 
               <div className="col-lg-6">
-                <div className={`form-group ${this.errorClass(this.state.formErrors['user[email]'])}`}>
+                <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
                   <label htmlFor="exampleFormControlInput1">Email address</label>
                   <input type="email"
                          className="form-control"
@@ -160,12 +160,12 @@ class UserRegistrationComponent extends Component {
                          autoComplete="off"
                          onChange={this.changeHandler}
                          value={this.state.user.email}
-                         name="user[email]"/>
+                         name="email"/>
                 </div>
               </div>
 
               <div className="col-lg-6">
-                <div className={`form-group ${this.errorClass(this.state.formErrors['user[email]'])}`}>
+                <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
                   <label htmlFor="password">Password</label>
                   <input type="password"
                          className="form-control"
@@ -173,12 +173,12 @@ class UserRegistrationComponent extends Component {
                          autoComplete="off"
                          onChange={this.changeHandler}
                          value={this.state.user.password}
-                         name="user[password]"/>
+                         name="password"/>
                 </div>
               </div>
 
               <div className="col-lg-6">
-                <div className={`form-group ${this.errorClass(this.state.formErrors['user[email]'])}`}>
+                <div className={`form-group ${this.errorClass(this.state.formErrors.email)}`}>
                   <label htmlFor="passwordConfirmation">Confirm Password</label>
                   <input type="password"
                          className="form-control"
@@ -186,7 +186,7 @@ class UserRegistrationComponent extends Component {
                          autoComplete="off"
                          onChange={this.changeHandler}
                          value={this.state.user.password_confirmation}
-                         name="user[password_confirmation]"/>
+                         name="password_confirmation"/>
                 </div>
               </div>
 
@@ -197,7 +197,7 @@ class UserRegistrationComponent extends Component {
                           id="exampleFormControlSelect1"
                           onChange={this.changeHandler}
                           value={this.state.user.region}
-                          name="user[region]">
+                          name="region">
                     <option>Ukraine</option>
                     <option>USA</option>
                     <option>Japan</option>
@@ -215,7 +215,7 @@ class UserRegistrationComponent extends Component {
                       <div className="form-check">
                         <input className="form-check-input"
                                type="radio"
-                               name="user[sex]"
+                               name="sex"
                                id="male"
                                onChange={this.changeHandler}
                                value="male" checked/>
@@ -231,7 +231,7 @@ class UserRegistrationComponent extends Component {
                       <div className="form-check">
                         <input className="form-check-input"
                                type="radio"
-                               name="user[sex]"
+                               name="sex"
                                id="female"
                                onChange={this.changeHandler}
                                value="female"/>
@@ -253,7 +253,7 @@ class UserRegistrationComponent extends Component {
                             rows="3"
                             onChange={this.changeHandler}
                             value={this.state.user.additional_information}
-                            name="user[additional_information]"/>
+                            name="additional_information"/>
                 </div>
               </div>
 
@@ -262,17 +262,17 @@ class UserRegistrationComponent extends Component {
                   <br/>
                   <input type="checkbox"
                          id="subscription"
-                         name="user[subscription]"/>
+                         name="subscription"/>
                   <label htmlFor="subscription">Subscribe for newsletters?</label>
                 </div>
               </div>
 
               <div className="col-lg-6">
-                <div className={`form-group text-left ${this.errorClass(this.state.formErrors['user[email]'])}`}>
+                <div className={`form-group text-left ${this.errorClass(this.state.formErrors.email)}`}>
                   <label htmlFor="image">Image</label><br/>
                   <input type="file"
                          id="image"
-                         name="user[image]"/>
+                         name="image"/>
                 </div>
               </div>
 
