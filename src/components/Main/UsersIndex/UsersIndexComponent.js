@@ -49,7 +49,7 @@ class UsersIndexComponent extends Component {
                   <td><img width="250px" className="img-thumbnail img-fluid" src={user.image.url} alt={user.name}/></td>
                   <td>{user.sex}</td>
                   <td>{user.subscription === true ? 'Yes' : 'No'}</td>
-                  <td>{user.additional_information}</td>
+                  <td>{user.additional_information ? user.additional_information : 'Information is absent'}</td>
                   <td>
                     <Router>
                       <Link className="btn btn-primary" to={`/users/${user.id}`}>Show more</Link>

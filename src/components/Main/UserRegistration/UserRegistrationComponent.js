@@ -96,7 +96,7 @@ class UserRegistrationComponent extends Component {
         break
       case 'image':
         imageValid = value.length > 0 && allowedExtensions.includes(value.split('.')[0])
-        fieldValidationErrors.image = imageValid ? '' : ' must be present'
+        fieldValidationErrors.image = imageValid ? '' : ` only ${allowedExtensions} are allowed`
         break
       default:
         break
