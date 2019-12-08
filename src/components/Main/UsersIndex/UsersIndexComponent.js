@@ -15,8 +15,7 @@ class UsersIndexComponent extends Component {
     fetch('https://create-users-api.herokuapp.com/users')
       .then(res => res.json())
       .then((data) => {
-        this.setState({ spinner: false })
-        this.setState({ users: data })
+        this.setState({ spinner: false, users: data })
       })
       .catch(console.log)
   }
