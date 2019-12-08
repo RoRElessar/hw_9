@@ -1,11 +1,13 @@
 import React, { Component } from 'react'
 import { BrowserRouter as Router, Link } from 'react-router-dom';
+import SpinnerComponent from '../Spinner/SpinnerComponent'
 
 class UsersIndexComponent extends Component {
   constructor (props) {
     super(props)
     this.state = {
-      users: []
+      users: [],
+      spinner: true
     }
   }
 
@@ -13,6 +15,7 @@ class UsersIndexComponent extends Component {
     fetch('https://create-users-api.herokuapp.com/users')
       .then(res => res.json())
       .then((data) => {
+        this.setState({ spinner: false })
         this.setState({ users: data })
       })
       .catch(console.log)
@@ -21,6 +24,7 @@ class UsersIndexComponent extends Component {
   render () {
     return (
       <div>
+        {this.state.spinner && <SpinnerComponent/>}
         <h1>All users</h1>
         <table className="table">
           <thead>

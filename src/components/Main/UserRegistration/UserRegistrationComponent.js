@@ -45,15 +45,21 @@ class UserRegistrationComponent extends Component {
 
   changeHandler = event => {
     const name = event.target.name
-    const value = event.target.value
+    let value
+
+    if (event.target.type === 'file') {
+      value = event.target.files
+    } else {
+      value = event.target.value
+    }
 
     this.setState({
       user: {
         [name]: value
       }
     },
-      () => { this.validateField(name, value) })
-
+      () => { this.validateField(name, value)
+    })
   }
 
   validateField(fieldName, value) {
@@ -67,7 +73,6 @@ class UserRegistrationComponent extends Component {
     let imageValid = this.state.imageValid
     const nameMatches = /^[0-9a-zA-Z]+$/
     const emailMatches = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i
-    const allowedExtensions = ['jpg', 'jpeg', 'png']
 
     switch (fieldName) {
       case 'first_name':
@@ -95,8 +100,9 @@ class UserRegistrationComponent extends Component {
         fieldValidationErrors.password_confirmation = passwordConfirmationValid ? '' : ' is too short'
         break
       case 'image':
-        imageValid = value.length > 0 && allowedExtensions.includes(value.split('.')[0])
-        fieldValidationErrors.image = imageValid ? '' : ` only ${allowedExtensions} are allowed`
+        imageValid = value.length > 0 &&
+          (value[0].type === 'image/jpeg' || value[0].type === 'image/png')
+        fieldValidationErrors.image = imageValid ? '' : ` only jpg, jpeg and png files are allowed`
         break
       default:
         break
@@ -122,8 +128,8 @@ class UserRegistrationComponent extends Component {
         this.state.nameValid &&
         this.state.emailValid &&
         this.state.passwordValid &&
-        this.state.passwordConfirmationValid
-        // this.state.imageValid
+        this.state.passwordConfirmationValid &&
+        this.state.imageValid
     });
   }
 
@@ -261,7 +267,8 @@ class UserRegistrationComponent extends Component {
                                name="sex"
                                id="male"
                                onChange={this.changeHandler}
-                               value="male" checked/>
+                               value="male"
+                               checked={this.state.user.sex === 'male'}/>
                         <label className="form-check-label" htmlFor="male">
                           Male
                         </label>
@@ -277,7 +284,8 @@ class UserRegistrationComponent extends Component {
                                name="sex"
                                id="female"
                                onChange={this.changeHandler}
-                               value="female"/>
+                               value="female"
+                               checked={this.state.user.sex === 'female'}/>
                         <label className="form-check-label" htmlFor="female">
                           Female
                         </label>
@@ -315,6 +323,7 @@ class UserRegistrationComponent extends Component {
                   <label htmlFor="image">Image</label><br/>
                   <input type="file"
                          id="image"
+                         onChange={this.changeHandler}
                          name="image"/>
                 </div>
               </div>
