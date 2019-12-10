@@ -54,8 +54,10 @@ class UserRegistrationComponent extends Component {
     }
 
     this.setState({
+      ...this.state,
       user: {
-        [name]: value
+        ...this.state.user,
+          [name]: value
       }
     },
       () => { this.validateField(name, value)
@@ -71,8 +73,6 @@ class UserRegistrationComponent extends Component {
     let passwordValid = this.state.passwordValid
     let passwordConfirmationValid = this.state.passwordConfirmationValid
     let imageValid = this.state.imageValid
-    const passwordInput = document.getElementById('password')
-    const passwordConfirmationInput = document.getElementById('passwordConfirmation')
     const nameMatches = /^[0-9a-zA-Z]+$/
     const emailMatches = /^([\w.%+-]+)@([\w-]+\.)+([\w]{2,})$/i
 
@@ -94,11 +94,11 @@ class UserRegistrationComponent extends Component {
         fieldValidationErrors.email = emailValid ? '' : ' is invalid'
         break
       case 'password':
-        passwordValid = value.length >= 10 && value === passwordConfirmationInput.value
+        passwordValid = value.length >= 10 && value === this.state.user.password_confirmation
         fieldValidationErrors.password = passwordValid ? '' : ' is too short and must match password confirmation input'
         break
       case 'password_confirmation':
-        passwordConfirmationValid = value.length >=10 && value === passwordInput.value
+        passwordConfirmationValid = value.length >=10 && value === this.state.user.password
         fieldValidationErrors.password_confirmation = passwordConfirmationValid ?
           '' :
           ' is too short and must match password input'
