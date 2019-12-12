@@ -54,9 +54,7 @@ class UsersIndexComponent extends Component {
                   <td>{user.subscription === true ? 'Yes' : 'No'}</td>
                   <td>{user.additional_information ? user.additional_information : 'Information is absent'}</td>
                   <td>
-                    <Router>
-                      <Link className="btn btn-primary" to={`/users/${user.id}`}>Show more</Link>
-                    </Router>
+                    <Link className="btn btn-primary" to={`/users/${user.id}`}>Show more</Link>
                   </td>
                 </tr>
               )

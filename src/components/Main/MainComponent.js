@@ -29,8 +29,8 @@ class MainComponent extends Component {
         </nav>
 
         <Switch>
-          <Route exact path='/' component={UserRegistrationComponent} />
-          <Route path="users/:id" component={UserShow} />
+          <Route exact path="/" component={UserRegistrationComponent} />
+          <Route path="/users/:id" component={UserShow} />
           <Route path='/users' component={UsersIndexComponent} />
         </Switch>
       </Router>
