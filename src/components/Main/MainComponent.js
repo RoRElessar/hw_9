@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { BrowserRouter as Router, Switch, Route, Link } from 'react-router-dom';
 import UserRegistrationComponent from './UserRegistration/UserRegistrationComponent'
 import UsersIndexComponent from './UsersIndex/UsersIndexComponent'
+import UserShow from './UserShow/UserShow'
 
 class MainComponent extends Component {
 
@@ -30,6 +31,7 @@ class MainComponent extends Component {
         <Switch>
           <Route exact path='/' component={UserRegistrationComponent} />
           <Route path='/users' component={UsersIndexComponent} />
+          <Route path="users/:id" component={UserShow} />
         </Switch>
       </Router>
     )

@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import api from '../../../services/apiService'
 
 class UserShow extends Component {
   render () {
