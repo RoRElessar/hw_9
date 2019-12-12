@@ -24,7 +24,6 @@ class UsersIndexComponent extends Component {
     return (
       <div>
         {this.state.spinner && <SpinnerComponent/>}
-        <SpinnerComponent/>
         <h1>All users</h1>
         <table className="table">
           <thead>
