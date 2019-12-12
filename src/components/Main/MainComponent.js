@@ -30,8 +30,8 @@ class MainComponent extends Component {
 
         <Switch>
           <Route exact path='/' component={UserRegistrationComponent} />
-          <Route path='/users' component={UsersIndexComponent} />
           <Route path="users/:id" component={UserShow} />
+          <Route path='/users' component={UsersIndexComponent} />
         </Switch>
       </Router>
     )
