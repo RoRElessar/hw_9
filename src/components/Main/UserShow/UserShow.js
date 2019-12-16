@@ -28,7 +28,6 @@ class UserShow extends Component {
     fetch('https://create-users-api.herokuapp.com/users/' + userId)
       .then(res => res.json())
       .then((data) => {
-        console.log(data);
         this.setState({
           spinner: false,
           user: {
