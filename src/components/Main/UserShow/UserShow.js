@@ -57,6 +57,7 @@ class UserShow extends Component {
 
         <div className="user-information">
           <img src={user.image} alt={user.name} width="250px"/>
+          <p>{user.sex}</p>
           <p><a href={`mailto:${user.email}`}>{user.email}</a></p>
           <div className="additional-information">{user.additional_information}</div>
         </div>
